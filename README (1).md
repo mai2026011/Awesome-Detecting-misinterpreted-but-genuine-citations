@@ -11,7 +11,7 @@ Most existing citation-checking work focuses on one failure mode: does this refe
 - [Papers](paper/Detecting_Misinterpreted_Genuine_Citations.pdf)
 - [Tools & Frameworks](tools/tools.md)
 - [Datasets & Benchmarks](datasets/datasets_report.md)
-- [Related Awesome Lists](github-repositories/github_repositories.md)
+- [Related Awesome Lists](github_repositories/github_repositories.md)
 
 - [License](LICENSE)
 
