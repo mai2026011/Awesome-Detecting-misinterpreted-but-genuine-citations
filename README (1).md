@@ -9,7 +9,7 @@ Most existing citation-checking work focuses on one failure mode: does this refe
 ## Contents
 
 - [Motivation](#motivation)
-- [Papers](https://github.com/mai2026011/Awesome-Detecting-misinterpreted-but-genuine-citations/blob/ef26c3aa3247d571739a9a7432bd36343a009c6e/paper/Detecting_Misinterpreted_Genuine_Citations.pdf)
+- [Papers](paper/Detecting_Misinterpreted_Genuine_Citations.pdf)
 - [Tools & Frameworks](https://github.com/mai2026011/Awesome-Detecting-misinterpreted-but-genuine-citations/blob/8ee51caf43f5719dfe721e9ed119e521a7eee855/tools/tools.md)
 - [Datasets & Benchmarks](https://github.com/mai2026011/Awesome-Detecting-misinterpreted-but-genuine-citations/blob/8ee51caf43f5719dfe721e9ed119e521a7eee855/datasets/datasets_report.md)
 - [Related Awesome Lists](https://github.com/mai2026011/Awesome-Detecting-misinterpreted-but-genuine-citations/blob/fe5b30948cc4886b2f5d80c64e3a537fdf13cf27/github%20repositories/github_repositories.md)
