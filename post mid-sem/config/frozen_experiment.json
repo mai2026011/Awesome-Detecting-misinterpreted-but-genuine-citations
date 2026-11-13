@@ -1,0 +1,132 @@
+{
+  "project": "Detecting Misinterpreted but Genuine Citations through Automated Claim Verification",
+  "prompt": "07 — Frozen experiment blueprint",
+  "freeze_date": "2026-11-12",
+  "study_type": "retrospective post-hoc evaluation of frozen predictions; not independent prospective calibration",
+  "analysis_status": "NOT_RUN; only source-file integrity checked; abstention outcomes not calculated",
+  "inputs": {
+    "source_of_truth": [
+      "claims_dev.jsonl",
+      "pred_dev.jsonl",
+      "claims_test.jsonl",
+      "pred_test.jsonl"
+    ],
+    "derived_convenience_csv": "citation_predictions_merged.csv",
+    "sha256": {
+      "claims_dev.jsonl": "52ea0785d06e6b4843ec8b44cf8ee52c1f5d419403ef37f1de499677c154a180",
+      "claims_test.jsonl": "ab0692fae3dc6a2cd37f7c7569d077d77e4813574023e38f4c1f0aa58909d495",
+      "pred_dev.jsonl": "bc2e54e4701b82f3fc4c4f9890a3e5064e03c92c00b1a832c15c2d1249d55de2",
+      "pred_test.jsonl": "6185d47a0f920399ef4b64d8add527e0dd8b58e7f644d05bfc790c6e664e989b",
+      "citation_predictions_merged.csv": "71f6e39487a54d6ba55cbdd60ff835887e6f068b5ee1038ee739d5569a1361a7"
+    }
+  },
+  "data": {
+    "test_n": 606,
+    "dev_n": 316,
+    "primary_split": "test",
+    "dev_usage": "descriptive file QA only; no threshold fitting or calibration",
+    "case_key": [
+      "split",
+      "claim_id",
+      "cited_doc_id"
+    ],
+    "probability_order": [
+      "NOT_ACCURATE",
+      "NEI",
+      "ACCURATE"
+    ],
+    "gold_label_rule": "use explicit evidence label if present; otherwise provisional NEI; sensitivity excludes provisional NEI",
+    "provisional_nei_dev_n": 24,
+    "provisional_nei_test_n": 50
+  },
+  "selection": {
+    "primary_score": "max_class_probability",
+    "score_direction": "descending",
+    "tie_break": [
+      "claim_id ascending numeric",
+      "cited_doc_id ascending numeric",
+      "original_input_row_position ascending"
+    ],
+    "coverage_rounding": "nearest integer, half-up: floor(n*coverage+0.5)",
+    "primary_coverage": 0.8,
+    "coverage_grid": [
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "test_k_by_coverage": {
+      "0.7": 424,
+      "0.8": 485,
+      "0.9": 545,
+      "1.0": 606
+    },
+    "test_primary_reject_n": 121
+  },
+  "policies": {
+    "B0": "accept all at full coverage",
+    "B1": "uniform random select same integer k at 80% coverage",
+    "P": "accept highest max_probability k cases, no fitted threshold"
+  },
+  "random_control": {
+    "seed": 42,
+    "replications": 1000,
+    "method": "independent without-replacement subsets of size k from 606 cases using numpy.random.default_rng(42)",
+    "exact_expected_selective_error": "full-sample empirical error rate at any k",
+    "primary_effect_estimator": "exact_expected_random_risk_minus_confidence_selected_risk",
+    "simulation_purpose": "sanity-check/distribution; Monte Carlo mean reported separately"
+  },
+  "uncertainty": {
+    "seed": 2026,
+    "bootstrap_replicates": 2000,
+    "unit": "claim-document pair",
+    "resample": "N test rows with replacement; recalculate full-sample risk, max-probability top-k selective risk; difference",
+    "ci": "percentile, empirical 2.5% and 97.5% quantiles",
+    "interpretation": "descriptive only; no verified article cluster, potential model-selection contamination"
+  },
+  "primary_metric": {
+    "name": "selective_error_rate",
+    "definition": "incorrect accepted predictions divided by accepted predictions",
+    "direction": "lower",
+    "effect": "full_test_error_rate minus selective_error_rate_at_80pct",
+    "success_rule": "effect>=0.03 and bootstrap percentile CI lower bound >0; otherwise negative/inconclusive",
+    "note": "3 percentage-point practical threshold, not literature-derived; retrospective effect only"
+  },
+  "secondary": {
+    "risk_coverage_points": [
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "aurc": "mean of prefix error rates after score ranking, k=1..N (discrete full-range AURC, lower better)",
+    "macro_f1": "fixed labels [NOT_ACCURATE,NEI,ACCURATE]; zero_division=0; accepted only",
+    "classwise": "accepted count, wrong count, precision and recall by class on accepted cases; zero_division=0",
+    "confidence_scores": {
+      "margin": "top1 probability minus top2 probability; descending",
+      "entropy": "-sum p log(p), nats; ascending"
+    },
+    "sensitivity": "exclude all rows with provisional NEI, rescale k at 80% on retained test subset of 556 rows; repeat main comparison"
+  },
+  "governance": {
+    "temperature_scaling": "SUSPENDED; dev potentially in training",
+    "test_threshold_tuning": "PROHIBITED",
+    "retrain_longformer": "NOT_NEEDED",
+    "claim_prospective_generalization": "PROHIBITED",
+    "paper_source_class_IRRELEVANT_vs_model_NEI": "NOT_VERIFIED",
+    "evaluation_changes": "append decision with date, reason, effect on comparability; no silent changes"
+  },
+  "planned_outputs": [
+    "results/preflight_manifest.json",
+    "results/policy_summary.csv",
+    "results/random_retention_draws.csv",
+    "results/risk_coverage.csv",
+    "results/per_case_selection.csv",
+    "results/classwise_errors.csv",
+    "results/bootstrap_effects.csv",
+    "results/explicit_label_sensitivity.csv",
+    "results/figures/risk_coverage.png",
+    "results/figures/classwise_errors.png",
+    "results/experiment_log.md"
+  ]
+}
