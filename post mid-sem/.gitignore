@@ -1,0 +1,16 @@
+# Raw or derived claim/document data; check redistribution rights before sharing
+/data/
+**/claims_*.jsonl
+**/pred_*.jsonl
+**/per_case_selection.csv
+**/high_confidence_errors*.csv
+**/five_high_confidence_mistakes.csv
+# Generated outputs and model weights
+/results/prompt12/
+/results/prompt13/
+*.ckpt
+*.pt
+*.pth
+__pycache__/
+.ipynb_checkpoints/
+.env
