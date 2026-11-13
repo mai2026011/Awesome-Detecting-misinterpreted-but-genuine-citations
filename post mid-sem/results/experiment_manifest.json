@@ -1,0 +1,28 @@
+{
+  "source_sha256": {
+    "claims_dev.jsonl": "52ea0785d06e6b4843ec8b44cf8ee52c1f5d419403ef37f1de499677c154a180",
+    "claims_test.jsonl": "ab0692fae3dc6a2cd37f7c7569d077d77e4813574023e38f4c1f0aa58909d495",
+    "pred_dev.jsonl": "bc2e54e4701b82f3fc4c4f9890a3e5064e03c92c00b1a832c15c2d1249d55de2",
+    "pred_test.jsonl": "6185d47a0f920399ef4b64d8add527e0dd8b58e7f644d05bfc790c6e664e989b"
+  },
+  "sample_count_test": 606,
+  "provisional_nei_test_count": 50,
+  "primary_coverage": 0.8,
+  "selected_k": 485,
+  "baseline_risk": 0.44224422442244227,
+  "confidence_risk": 0.4020618556701031,
+  "delta": 0.04018236875233916,
+  "random_mc_risk_mean": 0.4420474226804125,
+  "random_expected_risk": 0.44224422442244227,
+  "bootstrap_ci_95": [
+    0.01912898506345478,
+    0.059143955632676715
+  ],
+  "bootstrap_reps": 2000,
+  "bootstrap_seed": 2026,
+  "random_reps": 1000,
+  "random_seed": 42,
+  "aurc": 0.3537259043967706,
+  "success_3pp_and_positive_ci": true,
+  "research_status": "Retrospective descriptive; earlier exploratory access and test-validation risk prevent prospective significance claims"
+}
